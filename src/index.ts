@@ -1,3 +1,5 @@
+import { getVowelAppend, getFixedAppend, VOWELS, expand } from './utils';
+
 export type Resource = Record<string, any>;
 
 export type PseudoLocalizerOptions = {
@@ -29,41 +31,16 @@ export type PseudoLocalizerOptions = {
     vowels?: string[];
 
     /**
+     * The number of times to repeat `pad` when we find a vowel
+     * that needs to be expanded.
+     */
+    letterMultiplier?: number;
+
+    /**
      * When in fixed  mode, set the multiplier.
      */
     fixedMultiplier?: number;
 };
-
-function getVowelAppend(
-    str: string,
-    vowels: PseudoLocalizerOptions['vowels'],
-    pad: PseudoLocalizerOptions['pad']
-): string {
-    let append = '';
-
-    for (let i = 0; i < str.length; i++) {
-        if (vowels.indexOf(str[i]) > -1) {
-            append += pad;
-        }
-    }
-
-    return append;
-}
-
-function getFixedAppend(
-    str: string,
-    fixedMultiplier: PseudoLocalizerOptions['fixedMultiplier'],
-    pad: PseudoLocalizerOptions['pad']
-): string {
-    const newLength = Math.floor(str.length * fixedMultiplier);
-    let append = '';
-
-    for (let i = 0; i < newLength; i++) {
-        append += pad;
-    }
-
-    return append;
-}
 
 export function pseudo(
     str: string,
@@ -72,7 +49,8 @@ export function pseudo(
         pad = '-',
         prefix = '',
         suffix = '',
-        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'],
+        vowels = VOWELS,
+        letterMultiplier = 1,
         fixedMultiplier = 0.3,
     }: PseudoLocalizerOptions = {}
 ): string {
@@ -86,7 +64,7 @@ export function pseudo(
 
     const res =
         mode === 'vowels'
-            ? getVowelAppend(str, vowels, pad)
+            ? getVowelAppend(str, vowels, expand(letterMultiplier)(pad))
             : getFixedAppend(str, fixedMultiplier, pad);
 
     return prefix + str + res + suffix;
