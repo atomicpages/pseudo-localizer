@@ -1,4 +1,4 @@
-import { PseudoLocalizerOptions } from '.';
+import { PseudoLocalizerOptions } from './index';
 
 export const expand = (multiplier: number) => (pad: string): string => {
     let newPad = '';
@@ -12,13 +12,21 @@ export const expand = (multiplier: number) => (pad: string): string => {
 
 export function getVowelAppend(
     str: string,
-    vowels: PseudoLocalizerOptions['vowels'],
+    vowels: Required<PseudoLocalizerOptions>['vowels'],
     pad: PseudoLocalizerOptions['pad']
 ): string {
     let append = '';
 
+    const contains = (param: string): boolean => {
+        if (Array.isArray(vowels)) {
+            return Array.prototype.indexOf.call(vowels, param) > -1;
+        }
+
+        return vowels.has(param);
+    };
+
     for (let i = 0; i < str.length; i++) {
-        if (vowels.indexOf(str[i]) > -1) {
+        if (contains(str[i])) {
             append += pad;
         }
     }
@@ -28,7 +36,7 @@ export function getVowelAppend(
 
 export function getFixedAppend(
     str: string,
-    fixedMultiplier: PseudoLocalizerOptions['fixedMultiplier'],
+    fixedMultiplier: Required<PseudoLocalizerOptions>['fixedMultiplier'],
     pad: PseudoLocalizerOptions['pad']
 ): string {
     const newLength = Math.floor(str.length * fixedMultiplier);

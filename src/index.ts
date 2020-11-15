@@ -28,7 +28,7 @@ export type PseudoLocalizerOptions = {
     /**
      * An array of vowels to use when `mode` is set to `vowels`.
      */
-    vowels?: string[];
+    vowels?: string[] | Set<string>;
 
     /**
      * The number of times to repeat `pad` when we find a vowel
