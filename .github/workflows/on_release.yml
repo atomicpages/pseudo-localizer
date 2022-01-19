@@ -1,12 +1,15 @@
 name: Release
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - 'main'
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: 16
@@ -17,6 +20,7 @@ jobs:
           npm run build
           npm prune --production
       - name: publish
-        run: npm publish
+        run: npm run semantic-release -- -d
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{secrets.npm_token}}

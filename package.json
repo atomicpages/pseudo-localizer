@@ -33,7 +33,8 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm-run-all -p build:*",
     "check-types": "tsc --noEmit",
-    "prepush": "npm-run-all -p lint test check-types"
+    "prepush": "npm-run-all -p lint test check-types",
+    "semantic-release": "semantic-release"
   },
   "prettier": "@djthoms/prettier-config",
   "eslintConfig": {
@@ -52,6 +53,10 @@
     "@commitlint/prompt-cli": "^16.0.0",
     "@djthoms/eslint-config": "^4.3.0",
     "@djthoms/prettier-config": "^4.0.0",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.0",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/benchmark": "^2.1.0",
     "@types/glob": "^7.2.0",
     "@types/tape": "^4.13.0",
@@ -64,6 +69,7 @@
     "microtime": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.1",
+    "semantic-release": "^19.0.2",
     "tap-diff": "^0.1.1",
     "tape": "^5.0.1",
     "ts-node": "^10.0.0",
