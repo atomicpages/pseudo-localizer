@@ -4,12 +4,14 @@ A tiny utility that brings harmony to content authors and developers.
 
 ## Why?
 
-Most pseudo localization techniques mangle strings based on their ASCII values which creates two problems:
+Most pseudo localization techniques mangle strings based on their ASCII values which creates two
+problems:
 
 1. Pseudo localization doesn't work with non-ASCII encodings
 2. Fuzzy matching doesn't work (ex: `/Hello/.test('Ḥḛḛḽḽṓṓ')` vs `/Hello/.test('_Hello--_')`)
 
-`pseudo-localizer` works by taking the current string as-is and adds padding around the strings so fuzzy matches still behave properly.
+`pseudo-localizer` works by taking the current string as-is and adds padding around the strings so
+fuzzy matches still behave properly.
 
 ## Install
 
@@ -17,9 +19,14 @@ Most pseudo localization techniques mangle strings based on their ASCII values w
 npm i pseudo-localizer
 ```
 
+## How it Works
+
+Pseudo localization generally works by detecting the vowels of a language and
+
 ## Usage
 
-`pseudo-localizer` works in the browser, node, and deno. `pseudo-localizer` exports a single function that takes a string and options.
+`pseudo-localizer` works in the browser, node, and deno. `pseudo-localizer` exports a single
+function that takes a string and options.
 
 ```js
 import { pseudo } from 'pseudo-localizer';
