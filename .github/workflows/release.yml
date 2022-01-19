@@ -1,0 +1,26 @@
+name: Release
+on:
+  push:
+    branches:
+      - 'main'
+      - 'build-changes'
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - name: npm setup
+        run: |
+          npm ci
+          npm run build
+      - name: publish
+        run: npm run semantic-release -- -d
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
