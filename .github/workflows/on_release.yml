@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'build-changes'
 jobs:
   publish:
     runs-on: ubuntu-latest
