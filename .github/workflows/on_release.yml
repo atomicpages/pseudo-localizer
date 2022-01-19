@@ -19,7 +19,6 @@ jobs:
         run: |
           npm ci
           npm run build
-          npm prune --production
       - name: publish
         run: npm run semantic-release -- -d
         env:
