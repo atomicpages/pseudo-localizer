@@ -47,12 +47,17 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@commitlint/prompt-cli": "^16.0.0",
     "@djthoms/eslint-config": "^4.3.0",
     "@djthoms/prettier-config": "^4.0.0",
     "@types/benchmark": "^2.1.0",
     "@types/glob": "^7.2.0",
     "@types/tape": "^4.13.0",
     "benchmark": "^2.1.4",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "esbuild": "^0.14.11",
     "husky": "^7.0.4",
     "lint-staged": "^12.2.0",
@@ -70,5 +75,10 @@
       "eslint --fix"
     ],
     "*.{md,yml}": "prettier --write"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
